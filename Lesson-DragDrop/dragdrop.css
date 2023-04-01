@@ -1,0 +1,25 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.box {
+    border: 2px solid #A071CFFF;
+    width: 200px;
+    display: grid;
+    aspect-ratio: 1;
+   place-items: center;
+   border-radius: 5px;
+}
+
+.drop-item {
+    padding: 10px;
+    background-color: #A071CFFF;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #A071CFFF;
+    cursor: move;
+}

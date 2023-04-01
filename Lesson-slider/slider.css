@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+}
+
+.slider {
+    width: 100%;
+    height: 500px;
+    display: flex;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: calc(50% - 25px);
+    background: transparent;
+    border: 1px solid gray;
+}
+
+.right {
+    right: 0;
+}
+
+.right::before {
+    content: "→";
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.left::before {
+    content: "←";
+    font-size: 20px;
+    font-weight: bolder;
+}

@@ -1,34 +1,32 @@
-// CODE EXPLAINED channel
-
-// Select the Elements
+// выбрать элементы
 const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
 
-// Classes names
+// Имена классов
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
 
-// Variables
+//  переменные
 let LIST, id;
 
-// get item from localstorage
-let data = localStorage.getItem("TODO");
+// // получить item из localstorage
+ let data = localStorage.getItem("TODO");
 
-// check if data is not empty
+//проверять, не являются ли данные пустыми
 if(data){
     LIST = JSON.parse(data);
-    id = LIST.length; // set the id to the last one in the list
-    loadList(LIST); // load the list to the user interface
+    id = LIST.length; // установите идентификатор последним в списке
+    loadList(LIST); // загрузить список в пользовательский интерфейс
 }else{
     // if data isn't empty
     LIST = [];
     id = 0;
 }
 
-// load items to the user's interface
+// загружать элементы в пользовательский интерфейс
 function loadList(array){
     array.forEach(function(item){
         addToDo(item.name, item.id, item.done, item.trash);
@@ -47,7 +45,7 @@ const today = new Date();
 
 dateElement.innerHTML = today.toLocaleDateString("ru-RU", options);
 
-// add to do function
+// добавляем функцию.
 
 function addToDo(toDo, id, done, trash){
     
@@ -65,15 +63,15 @@ function addToDo(toDo, id, done, trash){
     
     const position = "beforeend";
     
-    list.insertAdjacentHTML(position, item);
+    list.insertAdjacentHTML(position, item); // insertAdjacentHTML() разбирает указанный текст как HTML или XML и вставляет полученные узлы (nodes) в DOM дерево в указанную позицию. Данная функция не переписывает имеющиеся элементы, что предотвращает дополнительную сериализацию и поэтому работает быстрее, чем манипуляции с innerHTML.
 }
 
-// add an item to the list user the enter key
+//  добавить элемент в список пользователя клавиши ввода
 document.addEventListener("keyup",function(even){
     if(event.keyCode == 13){
         const toDo = input.value;
         
-        // if the input isn't empty
+        // if the input isn't empty если input не пуст
         if(toDo){
             addToDo(toDo, id, false, false);
             
@@ -85,7 +83,8 @@ document.addEventListener("keyup",function(even){
             });
             
             // add item to localstorage ( this code must be added where the LIST array is updated)
-            localStorage.setItem("TODO", JSON.stringify(LIST));
+            //добавить элемент в localstorage ( этот код должен быть добавлен при обновлении массива LIST)
+            //localStorage.setItem("TODO", JSON.stringify(LIST));
             
             id++;
         }
@@ -94,7 +93,7 @@ document.addEventListener("keyup",function(even){
 });
 
 
-// complete to do
+// завершить to do
 function completeToDo(element){
     element.classList.toggle(CHECK);
     element.classList.toggle(UNCHECK);
@@ -103,27 +102,27 @@ function completeToDo(element){
     LIST[element.id].done = LIST[element.id].done ? false : true;
 }
 
-// remove to do
+// удалить to do
 function removeToDo(element){
     element.parentNode.parentNode.removeChild(element.parentNode);
     
     LIST[element.id].trash = true;
 }
 
-// target the items created dynamically
 
 list.addEventListener("click", function(event){
-    const element = event.target; // return the clicked element inside list
-    const elementJob = element.attributes.job.value; // complete or delete
+    const element = event.target; // возвращает нажатый элемент внутри списка
+    const elementJob = element.attributes.job.value; // заполнить или удалить
     
-    if(elementJob == "complete"){
+    if(elementJob === "complete"){
         completeToDo(element);
-    }else if(elementJob == "delete"){
+    }else if(elementJob === "delete"){
         removeToDo(element);
     }
     
     // add item to localstorage ( this code must be added where the LIST array is updated)
-    localStorage.setItem("TODO", JSON.stringify(LIST));
+    //добавить элемент в localstorage ( этот код должен быть добавлен при обновлении массива LIST)
+    //localStorage.setItem("TODO", JSON.stringify(LIST));
 });
 
 
